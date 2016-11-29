@@ -1,0 +1,30 @@
+:root {
+    --windowWidth: 640px;
+    --windowHeight: 360px;
+/*
+    --windowWidth: 1280px;
+    --windowHeight: 720px;
+*/
+}
+
+body {
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+#game-canvas {
+    margin: auto 0;
+}
+*/
+
+/*
+.center {
+    background-color: #3E4551;
+    width: var(--windowWidth);
+    height: var(--windowHeight);    
+    position: absolute;
+    left: calc(50vw - (var(--windowWidth)/2));
+    top: calc(50vh - var(--windowHeight)/2);
+}*/
