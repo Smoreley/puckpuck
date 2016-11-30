@@ -1,6 +1,6 @@
 class Puck extends GameObject {
-    setup() {
-        
+    setup(x, y) {
+        this.sprite = SpriteObject(this.body.circleRadius, this.body.circleRadius, './bin/imgs/cirtest.png');   
         this.sprite.interactive = true;
         
         this.sprite
@@ -13,17 +13,22 @@ class Puck extends GameObject {
     }
     
     onButtonDown() {
-        var mousePosition = game.renderer.plugins.interaction.mouse.global;
-        mGrab = Matter.Vector.create(mousePosition.x, mousePosition.y); 
+        mGrab = game.getMousePosition();
+        
+        drawTargetingLine = true;
     }
     
     onButtonUp(snt) {
-        var mousePosition = game.renderer.plugins.interaction.mouse.global;
-        mLetGo = Matter.Vector.create(mousePosition.x, mousePosition.y);    
+        mLetGo = game.getMousePosition();
 
         var fV = Matter.Vector.normalise(Matter.Vector.sub(mGrab, mLetGo));    
         var f = Matter.Vector.create(fV.x/50, fV.y/50);
         Matter.Body.applyForce(snt, snt.position, f);
+        
+        launchCount += 1;
+        document.getElementById("nShots").innerHTML = launchCount;
+        
+        drawTargetingLine = false;
     }
     
 }

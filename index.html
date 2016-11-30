@@ -5,9 +5,18 @@
         <meta charset="utf-8">
         <title>Pixi Challenge</title>
         
+        <!--PixiJS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.1.1/pixi.min.js"></script>
         
+        <!--Matter.js-->
         <script src="node_modules/matter-js/build/matter.js"></script>
+        
+        <!--JQUERY-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        
+        <!--Semantic UI-->
+        <link rel="stylesheet" type="text/css" href="node_modules/Semantic-UI/semantic.min.css">
+        <script src="node_modules/Semantic-UI/semantic.min.js"></script>
         
         
 <!--        <script src="src/trial/phytest.js"></script>-->
@@ -33,9 +42,27 @@
         
     </head>
     <body onload="init();">
-    
+        
+        <div class="ui secondary pointing menu">
+            <a class="active item">
+                Home
+            </a>
+            <a class="item">
+                Messages
+            </a>
+            <a class="item">
+                Friends
+            </a>
+            <div class="right menu">
+                <a class="ui item">
+                    Logout
+                </a>
+            </div>
+        </div>
+        
         <div class="center">
             <div id="game-canvas"></div>
+            <div>Number Of Shots: <span id="nShots">0</span></div>
         </div>
         
     </body>

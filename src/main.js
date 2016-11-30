@@ -1,10 +1,18 @@
 var game;
-
 var mGrab, mLetGo;
 var targetGoal;
+var launchCount = 0;
+var drawTargetingLine = false;
+
+var GAME_WIDTH, GAME_HEIGHT;
 
 // Wait for DOM to load
 function init() {
+    drawTargetingLine = false;
+    GAME_WIDTH = 800;
+    GAME_HEIGHT = 600;
+    
+    
     game = new Game();
     
     // Initialize Mouse position storage
@@ -31,7 +39,18 @@ function init() {
         game.setState("play");
     };
     
-//    var mouseKeyObject = mouse
+    // Down arrow (Reset level)
+    var resetObject = keyboard(40);
+    resetObject.press = function() {
+      console.log("Down arrow pressed");
+        game.states["play"] = new playState();
+        game.setState("play");
+    };
+
+//    resetObject.release = function() {
+//        console.log("Downkey was let go");
+//        game.setState("play");
+//    };
     
 }
 

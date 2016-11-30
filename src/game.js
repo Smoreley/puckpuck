@@ -3,6 +3,10 @@ class Game {
         // Set Frames per-second
         this.FPS = 30;
         
+        // Set initial State
+        this.states = {};
+        this.state;
+        
         // Creat a Matter.js engine
         this.engine = Matter.Engine.create();
         this.engine.world.gravity.y = 0;
@@ -11,6 +15,7 @@ class Game {
         // Create the renderer
         this.renderer = PIXI.autoDetectRenderer(800, 600);//640,360);
         this.renderer.backgroundColor = 0x212121;
+        window.addEventListener("resize", this.gameWindowResize);
         
         // Create Categories for collision using bit fields
         this.collisionCategories = [0x0001, 0x0002, 0x0004, 0x0008]
@@ -20,9 +25,6 @@ class Game {
         
         // run the engine
         Matter.Engine.run(this.engine);
-        
-        // Set initial State
-        this.states = {};        
         
         // create a renderer (WIREFRAME ON for debugging)
         this.render = Matter.Render.create({element: document.body, engine: this.engine });
@@ -46,6 +48,7 @@ class Game {
             
             // Render the container
             this.renderer.render(this.state.stage);
+            this.state.graphics.clear();
         }, 1000 / this.FPS);
     }
     
@@ -58,9 +61,29 @@ class Game {
         
         // add all of the bodies to the world
         Matter.World.add(this.engine.world, this.state.bodies);
+        
+        this.gameWindowResize();
     }
     
     addState(name, st) {
         this.states[name] = st;
+    }
+    
+    // Resizes game when window changes
+    gameWindowResize() {
+        
+        var ratio = Math.min(document.getElementById("game-canvas").offsetWidth/GAME_WIDTH, window.innerHeight/GAME_HEIGHT);
+        
+        // Scale the view appropriately to fill that dimension
+        game.state.stage.scale.x = game.state.stage.scale.y = ratio;
+
+        // Update the renderer dimensions
+        game.renderer.resize(Math.ceil(GAME_WIDTH * ratio),
+                  Math.ceil(GAME_HEIGHT * ratio));
+    }
+    
+    getMousePosition() {
+        var mousePosition = game.renderer.plugins.interaction.mouse.global;
+        return Matter.Vector.create(mousePosition.x / game.state.stage.scale.x, mousePosition.y / game.state.stage.scale.y);  
     }
 }

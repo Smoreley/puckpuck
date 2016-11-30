@@ -1,10 +1,8 @@
 class GameObject {
     constructor(x = 0, y = 0, r = 1) {
-        this.body = new PhysicsObject(x, y, r);
-        this.sprite = new SpriteObject(this.body.circleRadius, this.body.circleRadius, './bin/imgs/cirtest.png');   
+        this.body = PhysicsCircle(x, y, r);
+        this.sprite = null;  
         
-//        this.body;
-//        this.sprite;
         this.setup(x, y);
     }
     
@@ -26,6 +24,21 @@ class GameObject {
     setPosition(x = 0, y = 0) {
         Matter.Body.setPosition(this.body, Matter.Vector.create(x,y));
     }
+    
+    setSprite(img, w, h) {
+        var texture = PIXI.Texture.fromImage(img);
+        var spr = new PIXI.Sprite(texture);
+        
+        // Sprite Size
+        spr.height = h;
+        spr.width = w;
+        
+        // Set anchor point to center of sprite
+        spr.anchor.x = 0.5;
+        spr.anchor.y = 0.5;
+        
+        this.sprite = spr;
+    }
 }
 
 function SpriteObject(h = 1, w = 1, img) {
@@ -44,7 +57,7 @@ function SpriteObject(h = 1, w = 1, img) {
 }
 
 // Physical Creation for circle
-function PhysicsObject(pX = 0, pY = 0, radius = 1) {
+function PhysicsCircle (pX = 0, pY = 0, radius = 1) {
     return Matter.Bodies.circle(pX, pY, radius, { restitution: 1.0 });
 }
 
