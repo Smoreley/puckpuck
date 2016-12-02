@@ -1,7 +1,7 @@
 class playState extends state {
     setup() {        
         this.graphics = new PIXI.Graphics();
-        this.stage.addChild(this.graphics);  
+        this.stage.addChild(this.graphics);
         
         // Add interactable object
         var obj = new GameObject(150,150, 15);
@@ -11,7 +11,7 @@ class playState extends state {
         
         // Add noninteractable objects
         for(var i = 0; i < 10; i++) {
-            var n = new Puck(game.renderer.width*Math.random(), game.renderer.height*Math.random(), 10);
+            var n = new Puck(GAME_WIDTH*Math.random(), GAME_HEIGHT*Math.random(), 10);
             this.objects.push(n);
             
             n.setCollision(game.collisionCategories[0], game.collisionCategories[0] | game.collisionCategories[1]);
@@ -19,20 +19,20 @@ class playState extends state {
         }
         
         // Create borders
-        var leftBlock = Matter.Bodies.rectangle(-25, game.renderer.height, 100, game.renderer.height*2, { isStatic: true });
+        var leftBlock = Matter.Bodies.rectangle(-25, GAME_HEIGHT, 100, GAME_HEIGHT*2, { isStatic: true });
         
-        var rightBlock = Matter.Bodies.rectangle(game.renderer.width+25, game.renderer.height, 100, game.renderer.height*2, { isStatic: true });
+        var rightBlock = Matter.Bodies.rectangle(GAME_WIDTH+25, GAME_HEIGHT, 100, GAME_HEIGHT*2, { isStatic: true });
         
-        var topBlock = Matter.Bodies.rectangle(game.renderer.width/2, -25, game.renderer.width*2, 100, { isStatic: true });
+        var topBlock = Matter.Bodies.rectangle(GAME_WIDTH/2, -25, GAME_WIDTH*2, 100, { isStatic: true });
         
-        var bottomBlock = Matter.Bodies.rectangle(game.renderer.width/2, game.renderer.height+25, game.renderer.width*2, 100, { isStatic: true });
+        var bottomBlock = Matter.Bodies.rectangle(GAME_WIDTH/2, GAME_HEIGHT+25, GAME_WIDTH*2, 100, { isStatic: true });
         
         // Hold graphic representation for walls
         this.walls = [];
         
         var bottomSprite = {x: 0,
-                           y: game.renderer.height-25,
-                           w: game.renderer.width,
+                           y: GAME_HEIGHT-25,
+                           w: GAME_WIDTH,
                            h: 100};
         this.walls.push(bottomSprite);
         
@@ -48,7 +48,7 @@ class playState extends state {
         this.bodies.push(bottomBlock);
         
         // Add target
-        targetGoal = new Goal(game.renderer.width/2, game.renderer.height/2, 30);
+        targetGoal = new Goal(GAME_WIDTH/2, GAME_HEIGHT/2, 0);
         this.objects.unshift(targetGoal);    
         
         // Add mouse constraint

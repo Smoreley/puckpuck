@@ -3,14 +3,14 @@ var mGrab, mLetGo;
 var targetGoal;
 var launchCount = 0;
 var drawTargetingLine = false;
-
+var scaled;
 var GAME_WIDTH, GAME_HEIGHT;
 
 // Wait for DOM to load
 function init() {
     drawTargetingLine = false;
-    GAME_WIDTH = 800;
-    GAME_HEIGHT = 600;
+    GAME_WIDTH = 1280;
+    GAME_HEIGHT = 720;
     
     
     game = new Game();

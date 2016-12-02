@@ -1,6 +1,6 @@
 class Goal extends GameObject {
     setup(x, y) {
-        this.body = Matter.Bodies.circle(x, y, 30, { isSensor: true, isStatic: true});
+        this.body = Matter.Bodies.circle(x, y, 50, { isSensor: true, isStatic: true});
         
         this.sprite = SpriteObject(this.body.circleRadius, this.body.circleRadius, './bin/imgs/goal.png');
         

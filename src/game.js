@@ -12,8 +12,15 @@ class Game {
         this.engine.world.gravity.y = 0;
         this.engine.world.gravity.x = 0;
         
+        var rendererOptions = {
+            antialiasing: false,
+            transparent: false,
+            resolution: GAME_WIDTH/GAME_HEIGHT,
+            autoResize: true,
+        }
+        
         // Create the renderer
-        this.renderer = PIXI.autoDetectRenderer(800, 600);//640,360);
+        this.renderer = PIXI.autoDetectRenderer(GAME_WIDTH, GAME_HEIGHT, rendererOptions);//640,360);
         this.renderer.backgroundColor = 0x212121;
         window.addEventListener("resize", this.gameWindowResize);
         
@@ -76,10 +83,11 @@ class Game {
         
         // Scale the view appropriately to fill that dimension
         game.state.stage.scale.x = game.state.stage.scale.y = ratio;
+        
+        scaled = ratio;
 
         // Update the renderer dimensions
-        game.renderer.resize(Math.ceil(GAME_WIDTH * ratio),
-                  Math.ceil(GAME_HEIGHT * ratio));
+        game.renderer.resize(Math.ceil(GAME_WIDTH * ratio), Math.ceil(GAME_HEIGHT * ratio));
     }
     
     getMousePosition() {
