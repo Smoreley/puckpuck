@@ -1,11 +1,11 @@
+/*
 :root {
     --windowWidth: 640px;
     --windowHeight: 360px;
-/*
     --windowWidth: 1280px;
     --windowHeight: 720px;
-*/
 }
+*/
 
 html, body {
     width: 100%;
@@ -13,7 +13,7 @@ html, body {
 }
 
 body {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0 !important;
 }
 
 #game-canvas {
@@ -24,6 +24,7 @@ body {
     width: 98vw;
     max-width: 150vh;
     margin: 0 auto;
+    min-height: 100px;
 }
 
 .ui.secondary.menu {
@@ -32,6 +33,20 @@ body {
 
 .ui.container.segment {
 /*    width: 900px !important;*/
+}
+
+#stats {
+    background-color: #f0f0f0;
+    padding: 1em;
+/*    float: left;*/
+}
+
+h3 {
+    font-size: 2.5em;
+}
+
+p {
+    font-size: 1.5em;
 }
 
 /*

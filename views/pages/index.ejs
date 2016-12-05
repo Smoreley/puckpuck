@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+    
+    <body onload="init();">
+        <% include ../partials/nav.ejs %>
+
+        <div class="center">
+            <div id="game-canvas"></div>
+        </div>
+        
+        <div class="ui container">
+            <div id="stats">
+                <div>Number Of Shots: <span id="nShots">0</span></div>
+                <div>Number Of Captured Balls: <span id="nCaptured">0</span></div>
+                <div>Level: <span id="cLevel">0</span></div>
+            </div>
+        </div>
+        
+<!--        <button>Send an HTTP POST</button>-->
+        
+        <% include ../partials/footer.ejs %>
+    </body>
+</html>

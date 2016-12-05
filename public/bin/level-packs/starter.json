@@ -1,0 +1,20 @@
+{
+    "name": "starter",
+    "primaryColor": "#f1f1f1",
+    "secondaryColor": "#00ffff",
+    "backgroundColor": "#212121",
+    "level": [
+        {
+            "portal": {"x" : 0, "y" : 0},
+            
+            "balls": [
+                {"x" : 50, "y": 50}
+            ],
+            
+            "walls": [
+                {"x" : 100, "y" : 100, "w" : 50, "h" : 50}
+            ]
+            
+        }
+    ]
+}

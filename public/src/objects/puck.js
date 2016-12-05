@@ -1,5 +1,6 @@
 class Puck extends GameObject {
     setup(x, y) {
+        this.alive = true;
         this.sprite = SpriteObject(this.body.circleRadius, this.body.circleRadius, './bin/imgs/cirtest.png');   
         this.sprite.interactive = true;
         

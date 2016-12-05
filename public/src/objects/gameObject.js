@@ -15,6 +15,10 @@ class GameObject {
         this.sprite.rotation = this.body.angle;
     }
     
+    initializeEvents() {
+        
+    }
+    
     // Set stuff
     setCollision(cat = 0x0001, mask = 0x0001) {
         this.body.collisionFilter.category = cat;
