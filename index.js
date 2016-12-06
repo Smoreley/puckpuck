@@ -1,3 +1,5 @@
+var url = "mongodb://keybit:password@ds119588.mlab.com:19588/heroku_6db1wpxz";
+
 var express = require('express');
 var app = express();
 
@@ -24,7 +26,6 @@ app.get('/stats', function(req, res) {
 //    res.render("pages/stats");
     
     var MongoClient = mongodb.MongoClient;
-    var url = "mongodb://keybit:password@ds119588.mlab.com:19588/heroku_6db1wpxz";
     MongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Unable to connect to the server", err);
@@ -50,10 +51,32 @@ app.get('/guide', function(req, res) {
   res.render("pages/guide");
 });
 
+app.post('/findPlayer', function(req, res) {
+    
+    var MongoClient = mongodb.MongoClient;
+    MongoClient.connect(url, function(err, db) {
+       if(err) {
+           console.log("Unable to connect to the server", err);
+       } else {
+           console.log("Connection Established\n");
+           var collection = db.collection("playerstats");
+           
+           collection.find({name: req.body.name}).toArray(function(err, result) {               
+              if(err) {
+                  res.send(err);
+              } else if (result.length) {
+                  res.render("pages/stats", {"pages" : result});
+              } else {
+                  res.send("No documents found");
+              }
+           });
+       }
+    });
+});
+
 app.post("/savePlayerScore", function(req, res) {
     
     var MongoClient = mongodb.MongoClient;
-    var url = "mongodb://keybit:password@ds119588.mlab.com:19588/heroku_6db1wpxz";
     MongoClient.connect(url, function(err, db) {
        if(err) {
            console.log("Unable to connect to the server", err);

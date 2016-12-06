@@ -4,22 +4,36 @@
         <% include ../partials/header.ejs %>
     </head>
     
-    <body onload="init();">
-        <% include ../partials/nav.ejs %>
-
-        <div class="center">
-            <div id="game-canvas"></div>
-        </div>
-        
-        <div class="ui container">
-            <div id="stats">
-                <div>Number Of Shots: <span id="nShots">0</span></div>
-                <div>Number Of Captured Balls: <span id="nCaptured">0</span></div>
-                <div>Level: <span id="cLevel">0</span></div>
+    <body class="Site" onload="init();">
+        <main class="Site-content">
+            <% include ../partials/nav.ejs %>
+            
+            <div id="centerDisplay" class="center">
+                <div id="game-canvas"></div>
             </div>
-        </div>
         
-<!--        <button>Send an HTTP POST</button>-->
+    <!--        <button>Send an HTTP POST</button>-->
+            <div class="ui raised padded container segment">
+                <table class="ui very basic table">
+                    <tbody>
+                    <tr>
+                    <td>Number Of Shots</td>
+                    <td><span id="nShots">0</span></td>
+                    </tr>
+                    <tr>
+                    <td>Number Of Captured Balls</td>
+                    <td><span id="nCaptured">0</span></td>
+                    </tr>
+                    <tr>
+                    <td>Current Level:</td>
+                    <td><span id="cLevel">0</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+              <p>&nbsp;</p>
+            
+        </main>
         
         <% include ../partials/footer.ejs %>
     </body>

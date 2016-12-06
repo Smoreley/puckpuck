@@ -10,7 +10,9 @@ function screenWipe(g, t, lerpIn) {
         if(lerpTime <= 0) {
             // IF DONE then trigger event
             lerpTime = 0;
-            Matter.Events.trigger(game, 'transition');
+            transitionDone = true;
+            transitionIn = false;
+//            Matter.Events.trigger(game, 'transition', {done: true, tranIn: false});
             return;
         }
     } else {
@@ -22,9 +24,10 @@ function screenWipe(g, t, lerpIn) {
         dir = 1;
         lerpSpeed = 0.05;
         if(lerpTime >= 1) {
-            lerpTime = 1;
+            lerpTime = 1;            
                 // IF DONE then trigger event
-            Matter.Events.trigger(game, 'transition');
+            game.renderOnce();
+            Matter.Events.trigger(game, 'transition', {done: false, tranIn: true });
         }
     }
         

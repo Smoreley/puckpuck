@@ -6,11 +6,7 @@ $(function() {
         loadName(JSON.parse(document.cookie));
     } else {
         
-        document.getElementById("playerName").innerHTML = "<input id=\"playerNameInput\" type=\"text\" placeholder=\"Name\"> <i id=\"setName\" class=\"plus link icon\"></i>";
-        
-        document.getElementById("setName").onclick = function() {
-            saveName(document.getElementById("playerNameInput").value);
-        };
+        clearField();
     }
     
 });
@@ -18,10 +14,16 @@ $(function() {
 function saveName(pName) {
 //        playername = document.getElementById("playerNameInput").value;
     playername = pName;
+    
+    if(playername != "" ) {
+        var obj = {playername : pName};
+        document.cookie = JSON.stringify(obj);
+        document.getElementById("playerName").innerHTML = "<div class=\"header item\">"+playername+"</div> <div class=\"header item\"><i id=\"clearName\" class=\"remove link icon\"></i></div>";
         
-    var obj = {playername : pName};
-    document.cookie = JSON.stringify(obj);
-    document.getElementById("playerName").innerHTML = "<div class=\"header item\">"+pName+"</div>";
+        document.getElementById("clearName").onclick = function() {
+            clearField();
+        };
+    }
 }
 
 function loadName(pName) {
@@ -29,5 +31,19 @@ function loadName(pName) {
     
     // Saves cookies
 //    document.cookie = JSON.stringify(obj);
-    document.getElementById("playerName").innerHTML = "<div class=\"header item\">"+playername+"</div>";
+    document.getElementById("playerName").innerHTML = "<div class=\"header item\">"+playername+"</div> <div class=\"header item\"><i id=\"clearName\" class=\"remove link icon\"></i></div>";
+    
+    document.getElementById("clearName").onclick = function() {
+        clearField();
+    };
+}
+
+function clearField() {
+    playername = '';
+    document.cookie = '';
+    document.getElementById("playerName").innerHTML = "<input id=\"playerNameInput\" type=\"text\" placeholder=\"Name\"> <i id=\"setName\" class=\"plus link icon\"></i>";   
+    
+    document.getElementById("setName").onclick = function() {
+        saveName(document.getElementById("playerNameInput").value);
+    };
 }

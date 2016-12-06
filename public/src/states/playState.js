@@ -2,16 +2,16 @@ class playState extends state {
     setup() {        
         this.graphics = new PIXI.Graphics();
         
-//        this.stage.addChild(this.graphics);
+        game.selectedColor = game.randColors[Math.floor(Math.random() * game.randColors.length)];
         
         // Hold graphic representation for walls
         this.walls = [];
         
         this.puckCount = game.level + 1;
         
-        this.text = new PIXI.Text('PuckPuck',{fontFamily : 'Nova Script', fontSize: GAME_HEIGHT/2, fill : 0xf1f1f1, align : 'center'});
+        this.text = new PIXI.Text('PuckPuck',{fontFamily : 'Nova Script', fontSize: GAME_HEIGHT/2, fill : game.selectedColor, align : 'center'});
         
-        this.text.alpha = 0.1;
+        this.text.alpha = 0.3;
         this.text.anchor.x = 0.5;
         this.text.anchor.y = 0.5;
         this.text.x = GAME_WIDTH/2;
@@ -37,25 +37,34 @@ class playState extends state {
             this.objects.push(n);
             
             n.setCollision(game.collisionCategories[0], game.collisionCategories[0] | game.collisionCategories[1]);
-            n.body.label = "pck-"+i;
+            n.body.label = "pck-";//+i;
         }
         
+        var obX, obY;
+        var minSize = 40,
+            sizeRange = 50,
+            rotationRange = 25,
+            obsSpawnNum = 32;
         // Create Random Obstacles
-        for (var i = 0; i < 16; i++) {
-            this.CreateWall(Math.random()*GAME_WIDTH,Math.random()*GAME_HEIGHT, 40+Math.random()*50, 40+Math.random()*50, 0x3c82e7);
+        for (var i = 0; i < obsSpawnNum; i++) {
+            obX = Math.random()*GAME_WIDTH;
+            obY = Math.random()*GAME_HEIGHT;
+            if(OverlapSanityCheck({x:obX, y:obY},{x:GAME_WIDTH/2, y:GAME_HEIGHT/2}, 100)) {
+                this.CreateWall(obX, obY, minSize+Math.random()*sizeRange, minSize+Math.random()*sizeRange, game.selectedColor, Math.random()*rotationRange).label = "breakable";
+            }
         }
         
         // Create Borders
-        this.CreateWall(-30, GAME_HEIGHT, 100, GAME_HEIGHT*2, 0x3c82e7);
-        this.CreateWall(GAME_WIDTH+30, GAME_HEIGHT, 100, GAME_HEIGHT*2, 0x3c82e7);
-        this.CreateWall(GAME_WIDTH/2, -30, GAME_WIDTH*2, 100, 0x3c82e7);
-        this.CreateWall(GAME_WIDTH/2, GAME_HEIGHT+30, GAME_WIDTH*2, 100, 0x3c82e7);
+        this.CreateWall(-30, GAME_HEIGHT, 100, GAME_HEIGHT*2, game.selectedColor);
+        this.CreateWall(GAME_WIDTH+30, GAME_HEIGHT, 100, GAME_HEIGHT*2, game.selectedColor);
+        this.CreateWall(GAME_WIDTH/2, -30, GAME_WIDTH*2, 100, game.selectedColor);
+        this.CreateWall(GAME_WIDTH/2, GAME_HEIGHT+30, GAME_WIDTH*2, 100, game.selectedColor);
         
         // Add target
         targetGoal = new Goal(GAME_WIDTH/2, GAME_HEIGHT/2, 0);
         this.objects.unshift(targetGoal);
         
-               // Add all objects to stage and bodies
+       // Add all objects to stage and bodies
         for (var j = 0; j <= this.objects.length; j++) {
             if(this.objects[j] == undefined) { continue; }
             
@@ -82,7 +91,7 @@ class playState extends state {
             
             if(captureCount >= this.puckCount) {                
                 game.states["play"] = new playState();
-                game.setState("play");
+                Matter.Events.trigger(game, "changeState", {newState: "play"});
                 captureCount = 0;
                 game.timer.addTime(5000);
                 game.level += 1;
@@ -113,12 +122,15 @@ class playState extends state {
 //        var time = ((playTime - game.engine.timing.timestamp)/1000).toFixed(2);
         this.text.text = time;
         
+        // Out of time out of game (i.e game over)
         if(time == 0) {
-            this.level = 0;
-            game.setState("menu");
+            lastGameLevelCount = game.level;
+            console.log("The game level"+ lastGameLevelCount);
+            if(game.level > highestLevel) { highestLevel = game.level; }
+            console.log("The game level"+ lastGameLevelCount);
+            Matter.Events.trigger(game, "changeState", {newState: "menu"});
             dataSave("rnd", game.level, playername);
         }
-        
     }
     
     // Perform rendering
@@ -134,10 +146,16 @@ class playState extends state {
             this.graphics.endFill();
         }
         
-        for(var j = 0; j < this.walls.length; j++) {            
-            this.graphics.beginFill(this.walls[j].c); // blue
-            this.graphics.drawRoundedRect (this.walls[j].x, this.walls[j].y, this.walls[j].w, this.walls[j].h, 10);
-            this.graphics.endFill();
+        for(var j = 0; j < this.walls.length; j++) {
+            this.walls[j].g.clear();
+            this.walls[j].g.beginFill(this.walls[j].c)
+//            this.graphics.beginFill(this.walls[j].c); // blue
+//            this.graphics.drawRoundedRect (this.walls[j].x, this.walls[j].y, this.walls[j].w, this.walls[j].h, 10);
+//            this.graphics.endFill();
+            
+            
+                        this.walls[j].g.drawRoundedRect (this.walls[j].x, this.walls[j].y, this.walls[j].w, this.walls[j].h, 10);
+            this.walls[j].g.endFill()
         }
         
         if(drawTargetingLine) {
@@ -147,16 +165,35 @@ class playState extends state {
         }
     }
     
-    CreateWall(x, y, w, h, c = 0xf1f1f1) {
+    CreateWall(x, y, w, h, c = 0xf1f1f1, r = 0) {
         var someBlock = Matter.Bodies.rectangle(x, y, w, h, { isStatic: true });
+        
+        
+        var randomeRot = Math.random() * r;
+        
+        var myGraphic = new PIXI.Graphics();
+        myGraphic.position.x = x;
+        myGraphic.position.y = y;
+        myGraphic.pivot = new PIXI.Point(x,y);
+        
+        this.stage.addChild(myGraphic);
+        
+        if(randomeRot != 0) {
+            Matter.Body.rotate(someBlock, randomeRot);
+             myGraphic.rotation = randomeRot;   
+        }
+        
         var nGraphic = {x: x - w/2,
                    y: y - h/2,
                    w: w,
                    h: h,
-                   c: c};
-        
+                   r: r,
+                   c: c,
+                    g: myGraphic};
+        someBlock.refGraph = nGraphic;
         this.bodies.push(someBlock);
-        this.walls.push(nGraphic);   
+        this.walls.push(nGraphic);
+        return someBlock;
     }
     
     RemovePuck(gobj) {

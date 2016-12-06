@@ -6,9 +6,13 @@ class Game {
         // Set initial State
         this.states = {};
         this.state;
+        this.nextState;
         
-        this.timer;
+        this.timer = 0;
         this.level = 0;
+        
+        this.randColors = [0x3c82e7, 0x3ce7a1, 0xa13ce7];
+        this.selectedColor;
         
         this.frontGraphics = new PIXI.Graphics();
         
@@ -46,8 +50,17 @@ class Game {
         
         // When transition is done this event is called
         Matter.Events.on(this, "transition", function(event) {
-//            console.log(event);
-            transitionDone = true;
+            transitionDone = event.done;
+            
+            if(event.tranIn) {
+                transitionIn = event.tranIn;
+                game.setState(game.nextState);
+            }
+        });
+        
+        Matter.Events.on(this, "changeState", function(event) {
+            game.nextState = event.newState;
+            Matter.Events.trigger(game, 'transition', {done: false, tranIn: false });
         });
         
 //        this.updateList = new Array();
@@ -63,14 +76,13 @@ class Game {
             // Loop this function at 60 frames per second
             requestAnimationFrame(() => {this.loop(); });
             
-            this.state.update();
-
-            this.state.render();
-            
-            if(!transitionDone || !transitionIn) {
+            if(!transitionDone) {
                 screenWipe(this.frontGraphics, 0, transitionIn);
+            } else {
+                this.state.update();
             }
-                
+            
+            this.state.render();
             // Render the container
             this.renderer.render(this.state.stage);
             this.state.graphics.clear();
@@ -78,7 +90,16 @@ class Game {
         }, 1000 / this.FPS);
     }
     
-    setState(key) {
+    renderOnce() {
+        this.state.update();
+        this.state.render();
+        // Render the container
+        this.renderer.render(this.state.stage);
+        this.state.graphics.clear();
+        this.frontGraphics.clear();
+    }
+    
+    setState(key) {        
         // Unload previous state
         if(this.state != null)
             this.state.unload();

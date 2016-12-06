@@ -19,7 +19,7 @@ class Goal extends GameObject {
             for (var i = 0; i < pairs.length; i++) {
                 var pair = pairs[i];
                 
-                game.state.graphics.beginFill(0x323232); // white
+                game.state.graphics.beginFill(game.selectedColor); // white
                 game.state.graphics.drawCircle(pair.bodyA.position.x, pair.bodyA.position.y, 50);
                 game.state.graphics.endFill();
                 

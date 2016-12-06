@@ -1,3 +1,5 @@
+/*@import url('https://fonts.googleapis.com/css?family=Aref+Ruqaa');*/
+
 /*
 :root {
     --windowWidth: 640px;
@@ -47,6 +49,26 @@ h3 {
 
 p {
     font-size: 1.5em;
+}
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.Site-content {
+  flex: 1;
+}
+
+.footerLogo{
+/*    position: inherit;*/
+/*    display: inline;*/
+/*    display: inline-block;*/
+    height: 100%;
+    right: 0;
+    float: right;
+/*    clear: both;*/
 }
 
 /*

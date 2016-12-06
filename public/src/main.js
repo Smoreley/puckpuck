@@ -10,8 +10,9 @@ var drawTargetingLine = false;
 
 // Stats
 var launchCount = 0;
-var timeItTook = 0;
 var captureCount = 0;
+var lastGameLevelCount = 0;
+var highestLevel = 0;
 
 var transitionDone = false;
 var transitionIn = true;
@@ -74,8 +75,10 @@ function init() {
     var transitionButton = keyboard(81);
     transitionButton.press = function() {
       console.log("Q was pressed");
-        transitionIn = !transitionIn;
-        transitionDone = !transitionDone;
+//        transitionIn = !transitionIn;
+//        transitionDone = !transitionDone;
+//            transitionIn = false;
+//    transitionDone = false;
     };
     
 //    $("#setName").onClick(function(){

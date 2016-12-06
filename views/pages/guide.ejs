@@ -4,65 +4,112 @@
         <% include ../partials/header.ejs %>
     </head>
 
-    <body>
-        <div class="ui secondary pointing menu">
-            <a class="item" href="/">
-                Home
-            </a>
-            <a class="item" href="stats">
-                Stats
-            </a>
-            <a class="active item" href="guide">
-                Guide
-            </a>
-            <div class="right menu">
+    <body class="Site">
+        <main class="Site-content">
+            <div class="ui top menu">
                 <div class="item">
-                    <div id="playerName" class="ui icon input">
+                    <img src="smoreley.png">
+                </div>
+                <a class="item" href="/">
+                    Home
+                </a>
+                <a class="item" href="stats">
+                    Stats
+                </a>
+                <a class="active item" href="guide">
+                    Guide
+                </a>
+                <div class="right menu">
+                    <div class="item">
+                        <div id="playerName" class="ui icon input">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="ui vertical stripe segment">
-            <div class="ui middle aligned stackable grid container">
-                <div class="row">
-                    <div class="eight wide column">
-                        <h1 class="ui header">How To Play PuckPuck</h1>
-                        <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
-                        <h1 class="ui header">We Make Bananas That Can Dance</h1>
-                        <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
-                    </div>
-                    <div class="six wide right floated column">
-                        <img src="bin/imgs/goal.png">
+            <div class="ui very padded segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="row">
+                        <div class="eight wide column">
+                            <h1 class="ui header">How To Play PuckPuck</h1>
+                            <p>To start the game click on the spiral in the middle of the game window. I know you probably already knew this but I want to make sure that all my bases are covered. My hope is that I won't need to make a big green play button and that most people will under stand the odd start button.</p>
+                            <h1 class="ui header">Baby Steps</h1>
+                            <p>When you are in the game the first thing you do is locate the spiral. This isn't hard since the spiral will always been exactly in the middle (I know this because I programmed it that way). The Spiral is important because it is the goal that you will be trying to get all the pucks to</p>
+                        </div>
+                        <div class="six wide right floated column">
+                            <img src="bin/imgs/goal.png">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="ui vertical stripe segment">
-            <div class="ui text container">
-                <h1 class="ui header">Breaking The Grid, Grabs Your Attention</h1>
-                
-                <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-                
-                <h3 class="ui horizontal header divider">
-                    <a href="/stats">The Stats</a>
-                </h3>
-                
-                <h1 class="ui header">Did We Tell You About Our Bananas?</h1>
-                
-                <p>Yes I know you probably disregarded the earlier boasts as non-sequitor filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-            </div>
-        </div>
 
-        <div class="ui vertical stripe segment">
-            <div class="ui middle aligned stackable grid container">
-                <div class="center aligned column">
-                    <a class="ui huge button" href="/">Check it out!</a>
+            <div class="ui vertical stripe segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="row">
+                        <div class="eight wide column">
+                            <h1 class="ui header">The Timer</h1>
+                            <p>Each new game you will start with twenty seconds on the clock. There are two ways to get more time. Successfully landing a puck in the spiral (gives 2.5 seconds), and by clearing the stage of all pucks (gives 5 seconds). </p>
+                        </div>
+                        <div class="eight wide column">
+                            <h1 class="ui header">The Puck</h1>
+                            <p>Click and drag on a puck. When you let go the puck will be slingshot off in the opposite direction. Think of it as a bow where you are pulling back and launching.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
+
+            <div class="ui very padded segment">
+                <div class="ui text container">
+                    <h1 class="ui header">Breaking The Grid</h1>
+
+                    <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
+
+                    <h3 class="ui horizontal header divider">
+                        <a href="/stats">The Stats</a>
+                    </h3>
+
+                    <h1 class="ui header">PuckPuck History</h1>
+                    <p>First let me tell you alittle about PuckPuck. PuckPuck was inspired in part by pool (or billard balls if you prefer) and angry birds. You are probably saying to your self "I can see the pool inspiration but I don't see anything relating to angry birds?". You would not be wrong in thinking that. Over the course of building the app any ties the game did have to angry birds ended up getting cut. Which is really a shame because there were some good ones. </p>
+                </div>
+            </div>
+            
+                        <div class="ui vertical stripe segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="row">
+                        <div class="two wide centered column">
+                            <img src="bin/imgs/bean_circ.png">
+                        </div>
+                        <div class="eight wide column">
+                            <h1 class="ui header">This is You</h1>
+                            <p>To start the game click on the spiral in the middle of the game window. I know you probably already knew this but I want to make sure that all my bases are covered. My hope is that I won't need to make a big green play button and that most people will under stand the odd start button.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ui very padded segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="row">
+                        <div class="eight wide column">
+                            <h1 class="ui header">About</h1>
+                            <p>Each new game you will start with twenty seconds on the clock. There are two ways to get more time. Successfully landing a puck in the spiral (gives 2.5 seconds), and by clearing the stage of all pucks (gives 5 seconds). </p>
+                        </div>
+                        <div class="eight wide column">
+                            <h1 class="ui header">The what</h1>
+                            <p>Click and drag on a puck. When you let go the puck will be slingshot off in the opposite direction. Think of it as a bow where you are pulling back and launching.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui vertical stripe segment">
+                <div class="ui middle aligned stackable grid container">
+                    <div class="center aligned column">
+                        <a class="ui huge button" href="/">Check it out!</a>
+                    </div>
+                </div>
+            </div>
+        </main>        
         <% include ../partials/footer.ejs %>
     </body>
 </html>
