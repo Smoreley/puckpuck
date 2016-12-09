@@ -77,7 +77,7 @@ class menuState extends state {
 
 function onButtonDown() {
     game.timer = new Timer();
-    game.level = 0;
+    game.level = 1;
     game.states["play"] = new playState();
     Matter.Events.trigger(game, "changeState", {newState: "play"});
 //    game.setState("play");

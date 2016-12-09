@@ -27,9 +27,15 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="ui container center aligned">
+                <h1 class="ui header">Leaderboard</h1>
+            </div>
+            
+            <% if (pages.finding == false) { %>
 
             <% var highestScore = 0; var totalScore = 0; %>
-            <% pages.forEach(function(d) { %>
+            <% pages.players.forEach(function(d) { %>
                 <% if (highestScore < d.score) highestScore = d.score; %>
                 <% totalScore += d.score; %>
             <% }); %>
@@ -47,7 +53,7 @@
                         </div>
                         <div class="ui large statistic">
                             <div class="value">
-                            <%= pages.length %>
+                            <%= pages.players.length %>
                             </div>
                             <div class="label">
                                 Unique Players
@@ -64,9 +70,11 @@
                     </div>
                 </div>
             </div>
+            
+            <% } %>
 
             <div class="ui container">
-                <h1 class="ui header">Get your stats all your stats here!</h1>
+                <h3 class="ui header right aligned">Get your stats all your stats here!</h3>
             </div>
 
             <div class="ui container">
@@ -78,7 +86,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% pages.forEach(function(d) { %>
+                        <% pages.players.forEach(function(d) { %>
                         <tr>
                             <td><%= d.name %></td>
                             <td><%= d.score %></td>
@@ -91,6 +99,8 @@
             <div class="ui raised padded container segment">
                 <%= JSON.stringify(pages) %>
             </div>
+            
+            
 
     <!--
             <div class="ui raised padded container segment">

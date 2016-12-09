@@ -1,4 +1,4 @@
-var playername;
+var playername = "untitled";
 
 $(function() {
     
@@ -12,7 +12,6 @@ $(function() {
 });
 
 function saveName(pName) {
-//        playername = document.getElementById("playerNameInput").value;
     playername = pName;
     
     if(playername != "" ) {
@@ -39,7 +38,7 @@ function loadName(pName) {
 }
 
 function clearField() {
-    playername = '';
+    playername = "untitled";
     document.cookie = '';
     document.getElementById("playerName").innerHTML = "<input id=\"playerNameInput\" type=\"text\" placeholder=\"Name\"> <i id=\"setName\" class=\"plus link icon\"></i>";   
     

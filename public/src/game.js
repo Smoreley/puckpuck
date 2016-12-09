@@ -9,7 +9,7 @@ class Game {
         this.nextState;
         
         this.timer = 0;
-        this.level = 0;
+        this.level = 1;
         
         this.randColors = [0x3c82e7, 0x3ce7a1, 0xa13ce7];
         this.selectedColor;
@@ -62,10 +62,6 @@ class Game {
             game.nextState = event.newState;
             Matter.Events.trigger(game, 'transition', {done: false, tranIn: false });
         });
-        
-//        this.updateList = new Array();
-//        this.renderList = new Array();
-//        this.updateList.push(testing);
         
         // Start Game Loop
         this.loop();

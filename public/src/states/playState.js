@@ -7,7 +7,7 @@ class playState extends state {
         // Hold graphic representation for walls
         this.walls = [];
         
-        this.puckCount = game.level + 1;
+        this.puckCount = game.level;
         
         this.text = new PIXI.Text('PuckPuck',{fontFamily : 'Nova Script', fontSize: GAME_HEIGHT/2, fill : game.selectedColor, align : 'center'});
         
@@ -83,6 +83,10 @@ class playState extends state {
             this.objects[j].initializeEvents();
         }
         
+        // Edit dom
+        document.getElementById("nCaptured").innerHTML = captureCount+"/"+this.puckCount;
+        document.getElementById("cLevel").innerHTML = game.level;
+        
         // On BallDestroyed event
         Matter.Events.on(game.engine, "ballDestroyed", (event) => {
             captureCount += 1;
@@ -90,17 +94,16 @@ class playState extends state {
             game.timer.addTime(2500);
             
             if(captureCount >= this.puckCount) {                
+                game.level += 1;
                 game.states["play"] = new playState();
                 Matter.Events.trigger(game, "changeState", {newState: "play"});
                 captureCount = 0;
                 game.timer.addTime(5000);
-                game.level += 1;
             }
             
             // Edit dom
-            document.getElementById("nCaptured").innerHTML = captureCount;
+            document.getElementById("nCaptured").innerHTML = captureCount+"/"+this.puckCount;
             document.getElementById("cLevel").innerHTML = game.level;
-            
         });
     }
     
