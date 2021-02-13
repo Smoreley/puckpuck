@@ -1,4 +1,8 @@
 # PuckPuck - Game
+<p align="center">
+    <img alt="PuckPuck front page" src="imgs/puckpuck-front.PNG" width="1024">
+</p>
+
 
 You can play the game [HERE](https://puckme.herokuapp.com/)
 
